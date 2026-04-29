@@ -2,7 +2,23 @@ import { useEffect, useState } from "react";
 import type { TrainingData } from "../types";
 import Stack from "@mui/material/Stack";
 import { DataGrid } from "@mui/x-data-grid";
-import type { GridColDef } from "@mui/x-data-grid";
+import type { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
+
+
+const CustomerName = ({ url }: { url: string }) => {
+    const [name, setName] = useState<string>("Loading...");
+
+    useEffect(() => {
+        fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+                setName(`${data.firstname} ${data.lastname}`);
+            })
+            .catch(() => setName("Error loading name"));
+    }, [url]);
+
+    return <span>{name}</span>;
+};
 
 
 
@@ -50,7 +66,15 @@ function Trainings() {
         },
 
         { field: "duration", headerName: "Duration" },
-        { field: "activity", headerName: "Activity" },
+        { field: "activity", width: 150, headerName: "Activity" },
+        {
+            field: "customer",
+            headerName: "Customer",
+            width: 200,
+            renderCell: (params: GridRenderCellParams) => (
+                <CustomerName url={params.row._links.customer.href} />
+            )
+        },
     ]
 
 
