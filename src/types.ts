@@ -22,6 +22,7 @@ export type CustomerData = {
     postcode: string;
     city: string;
     email: string;
+    phone: string;
     _links:{
         self: {
             href: string;

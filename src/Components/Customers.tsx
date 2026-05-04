@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import type { CustomerData } from "../types";
+import type { CustomerData, Customer } from "../types";
 import Stack from "@mui/material/Stack";
 import { DataGrid } from "@mui/x-data-grid";
 import type { GridColDef } from "@mui/x-data-grid";
-import { fetchCustomers } from "../trainingapi";
+import { fetchCustomers, saveCustomer } from "../trainingapi";
+import AddCustomer from "./AddCustomer";
 
 
 function Customers() {
@@ -20,6 +21,12 @@ function Customers() {
         getCustomers();
     }, []);
 
+
+    const handleAdd = (customer: Customer) => {
+        saveCustomer(customer)
+            .then(() => getCustomers())
+            .catch(err => console.error(err))
+    }
 
     const columns: GridColDef[] = [
         { field: "firstname", headerName: "First Name" },
@@ -40,6 +47,7 @@ function Customers() {
         <>
             <Stack sx={{ mt: 2, mb: 2 }} direction="row">
                 <h1>Customers</h1>
+                <AddCustomer handleAdd={handleAdd} />
             </Stack>
             <div style={{ width: "85%", height: 500, margin: "auto" }} >
 
