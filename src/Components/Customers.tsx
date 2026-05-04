@@ -3,6 +3,7 @@ import type { CustomerData } from "../types";
 import Stack from "@mui/material/Stack";
 import { DataGrid } from "@mui/x-data-grid";
 import type { GridColDef } from "@mui/x-data-grid";
+import { fetchCustomers } from "../trainingapi";
 
 
 function Customers() {
@@ -10,17 +11,10 @@ function Customers() {
     const [customers, setCustomers] = useState<CustomerData[]>([]);
 
     const getCustomers = () => {
-        fetch(import.meta.env.VITE_API_URL + "/customers")
-            .then(response => {
-                if (!response.ok)
-                    throw new Error("Error when fetching");
-
-                return response.json();
-            })
-
+        fetchCustomers()
             .then(data => setCustomers(data._embedded.customers))
             .catch(err => console.log(err))
-    }
+    };
 
     useEffect(() => {
         getCustomers();

@@ -3,6 +3,7 @@ import type { TrainingData } from "../types";
 import Stack from "@mui/material/Stack";
 import { DataGrid } from "@mui/x-data-grid";
 import type { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
+import { fetchTrainings } from "../trainingapi";
 
 
 const CustomerName = ({ url }: { url: string }) => {
@@ -28,17 +29,10 @@ function Trainings() {
     const [trainings, setTrainings] = useState<TrainingData[]>([]);
 
     const getTrainings = () => {
-        fetch(import.meta.env.VITE_API_URL + "/trainings")
-            .then(response => {
-                if (!response.ok)
-                    throw new Error("Error when fetching");
-
-                return response.json();
-            })
-
+        fetchTrainings()
             .then(data => setTrainings(data._embedded.trainings))
-            .catch(err => console.log(err))
-    }
+            .catch(err => console.log(err));
+    };
 
     useEffect(() => {
         getTrainings();
