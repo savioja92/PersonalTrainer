@@ -1,5 +1,6 @@
 /* Tänne tulee kaikki API kutsut */
 import type { Customer } from "./types";
+import type { Training } from "./types";
 
 // BASIC FETCH
 
@@ -28,6 +29,9 @@ export const fetchCustomers = () => {
 
 
 
+
+// CUSTOMER 
+
 // NEW CUSTOMER
 
 export const saveCustomer = (customer: Customer) => {
@@ -41,6 +45,83 @@ export const saveCustomer = (customer: Customer) => {
     .then(response => {
         if (!response.ok)
             throw new Error("Error when adding a new customer");
+
+        return response.json();
+        })
+}
+
+
+// CUSTOMER UPDATE
+
+export const updateCustomer = (url: string, customer: Customer) => {
+    return fetch(url, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(customer)
+    })
+    .then(response => {
+        if (!response.ok)
+            throw new Error("Error when updating a customer");
+
+        return response.json();
+        })
+}
+
+
+// DELETE CUSTOMER
+
+export const deleteCustomer = (url : string) => {
+    return fetch(url, {
+        method: "DELETE"
+    
+    })
+    .then(response => {
+        if (!response.ok)
+            throw new Error("Error when deleting a customer");
+
+        return response;
+        })
+}
+
+
+
+
+// TRAININGS
+
+// ADD TRAINING 
+
+export const saveTraining = (training: Training) => {
+    return fetch(import.meta.env.VITE_API_URL + "/trainings", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(training)
+    })
+    .then(response => {
+        if (!response.ok)
+            throw new Error("Error when adding a training");
+
+        return response.json();
+        })
+}
+
+
+// DELETE TRAINING
+
+export const deleteTraining = (training: Training) => {
+    return fetch(import.meta.env.VITE_API_URL + "/trainings/{id}", {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(training)
+    })
+    .then(response => {
+        if (!response.ok)
+            throw new Error("Error when deleting a training");
 
         return response.json();
         })

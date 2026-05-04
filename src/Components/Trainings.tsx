@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import type { TrainingData } from "../types";
+import type { TrainingData, Training } from "../types";
 import Stack from "@mui/material/Stack";
 import { DataGrid } from "@mui/x-data-grid";
 import type { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
-import { fetchTrainings } from "../trainingapi";
+import { fetchTrainings, saveTraining } from "../trainingapi";
+import AddTraining from "./AddTraining";
 
 
 const CustomerName = ({ url }: { url: string }) => {
@@ -33,10 +34,15 @@ function Trainings() {
             .then(data => setTrainings(data._embedded.trainings))
             .catch(err => console.log(err));
     };
-
     useEffect(() => {
         getTrainings();
     }, []);
+
+    const handleAdd = (newTraining: Training) => {
+        saveTraining(newTraining)
+        .then(() => getTrainings())
+        .catch(err => console.error(err))
+    };
 
 
     const columns: GridColDef[] = [
@@ -89,6 +95,7 @@ function Trainings() {
                     getRowId={row => row._links.self.href}
                 />
             </div>
+            <AddTraining handleAdd={handleAdd} />
         </>
     )
 
