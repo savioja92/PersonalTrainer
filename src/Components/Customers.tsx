@@ -7,12 +7,14 @@ import { deleteCustomer, fetchCustomers, saveCustomer, updateCustomer } from "..
 import AddCustomer from "./AddCustomer";
 import EditCustomer from "./EditCustomer";
 import Button from "@mui/material/Button";
+import Snackbar from "@mui/material/Snackbar";
 
 
 
 function Customers() {
 
     const [customers, setCustomers] = useState<CustomerData[]>([]);
+    const [open, setOpen] = useState(false);
 
     const getCustomers = () => {
         fetchCustomers()
@@ -65,6 +67,7 @@ function Customers() {
             deleteCustomer(url)
                 .then(() => {
                     getCustomers();
+                    setOpen(true);
                 })
                 .catch(err => console.error(err));
         }
@@ -102,6 +105,12 @@ function Customers() {
                 />
                 <AddCustomer handleAdd={handleAdd} />
             </div>
+            <Snackbar
+                open={open}
+                autoHideDuration={3000}
+                onClose={() => setOpen(false)}
+                message="Customer deleted succesfully"
+            />
         </>
     )
 

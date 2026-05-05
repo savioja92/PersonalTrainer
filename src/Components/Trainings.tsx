@@ -3,8 +3,10 @@ import type { TrainingData, Training } from "../types";
 import Stack from "@mui/material/Stack";
 import { DataGrid } from "@mui/x-data-grid";
 import type { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
-import { fetchTrainings, saveTraining } from "../trainingapi";
+import { deleteTraining, fetchTrainings, saveTraining } from "../trainingapi";
 import AddTraining from "./AddTraining";
+import Snackbar from "@mui/material/Snackbar";
+import Button from "@mui/material/Button";
 
 
 const CustomerName = ({ url }: { url: string }) => {
@@ -18,16 +20,17 @@ const CustomerName = ({ url }: { url: string }) => {
             })
             .catch(() => setName("Error loading name"));
     }, [url]);
-
     return <span>{name}</span>;
 };
-
-
-
 
 function Trainings() {
 
     const [trainings, setTrainings] = useState<TrainingData[]>([]);
+    const [open, setOpen] = useState(false);
+
+
+
+    // API CALLS
 
     const getTrainings = () => {
         fetchTrainings()
@@ -44,6 +47,21 @@ function Trainings() {
         .catch(err => console.error(err))
     };
 
+    const handleDelete = (url: string) => {
+            if (window.confirm("Are you sure?")) {
+                deleteTraining(url)
+                    .then(() => {
+                        getTrainings();
+                        setOpen(true);
+                    })
+                    .catch(err => console.error(err));
+            }
+        };
+
+
+
+
+    // COLUMNS
 
     const columns: GridColDef[] = [
         {
@@ -75,6 +93,20 @@ function Trainings() {
                 <CustomerName url={params.row._links.customer.href} />
             )
         },
+        {
+            field: "_links.self.href",
+            headerName: "",
+            sortable: false,
+            filterable: false,
+            disableColumnMenu: true,
+            renderCell: (params: GridRenderCellParams) =>
+                <Button
+                    color="error"
+                    size="small"
+                    onClick={() => handleDelete(params.row._links.self.href)}>
+                    DELETE
+                </Button>
+        }
     ]
 
 
@@ -95,6 +127,12 @@ function Trainings() {
                     getRowId={row => row._links.self.href}
                 />
             </div>
+            <Snackbar
+                open={open}
+                autoHideDuration={3000}
+                onClose={() => setOpen(false)}
+                message="Training session deleted succesfully"
+            />
             <AddTraining handleAdd={handleAdd} />
         </>
     )

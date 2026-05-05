@@ -111,18 +111,15 @@ export const saveTraining = (training: Training) => {
 
 // DELETE TRAINING
 
-export const deleteTraining = (training: Training) => {
-    return fetch(import.meta.env.VITE_API_URL + "/trainings/{id}", {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(training)
+export const deleteTraining = (url : string) => {
+    return fetch(url, {
+        method: "DELETE"
+    
     })
     .then(response => {
         if (!response.ok)
-            throw new Error("Error when deleting a training");
+            throw new Error("Error when deleting a customer");
 
-        return response.json();
+        return response;
         })
 }
