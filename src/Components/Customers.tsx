@@ -102,6 +102,12 @@ function Customers() {
                     columns={columns}
                     rows={customers}
                     getRowId={row => row._links.self.href}
+                    slotProps={{
+                        toolbar: {
+                            printOptions: { disableToolbarButton: true },
+                        },
+                    }}
+                    showToolbar
                 />
                 <AddCustomer handleAdd={handleAdd} />
             </div>
