@@ -1,4 +1,3 @@
-/* Tänne tulee kaikki API kutsut */
 import type { Customer } from "./types";
 import type { Training } from "./types";
 
@@ -84,6 +83,25 @@ export const deleteCustomer = (url : string) => {
         return response;
         })
 }
+
+
+ // CUSTOMER NAME
+
+export const fetchCustomerByUrl = (url: string) => {
+    return fetch(url)
+        .then(response => {
+            if (!response.ok)
+                throw new Error("Error when fetching customer details");
+
+            return response.json();
+        });
+}
+
+
+
+
+
+
 
 
 

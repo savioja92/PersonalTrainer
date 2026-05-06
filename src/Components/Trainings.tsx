@@ -3,7 +3,7 @@ import type { TrainingData, Training } from "../types";
 import Stack from "@mui/material/Stack";
 import { DataGrid } from "@mui/x-data-grid";
 import type { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
-import { deleteTraining, fetchTrainings, saveTraining } from "../trainingapi";
+import { deleteTraining, fetchTrainings, saveTraining, fetchCustomerByUrl } from "../trainingapi";
 import AddTraining from "./AddTraining";
 import Snackbar from "@mui/material/Snackbar";
 import Button from "@mui/material/Button";
@@ -13,13 +13,13 @@ const CustomerName = ({ url }: { url: string }) => {
     const [name, setName] = useState<string>("Loading...");
 
     useEffect(() => {
-        fetch(url)
-            .then((response) => response.json())
-            .then((data) => {
-                setName(`${data.firstname} ${data.lastname}`);
-            })
-            .catch(() => setName("Error loading name"));
+        fetchCustomerByUrl(url)
+            .then(data => setName(`${data.firstname} ${data.lastname}`))
+            .catch(err => {console.error(err);
+                setName("Error loading name");
+            });
     }, [url]);
+
     return <span>{name}</span>;
 };
 

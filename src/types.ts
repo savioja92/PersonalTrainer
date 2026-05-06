@@ -36,5 +36,16 @@ export type CustomerData = {
     }
 }
 
+export type CalendarEvent = {
+    id: string;
+    title: string;
+    start: string; // ISO string
+    end: string; // ISO string
+    customer: string;
+}
+
+
+
+
 export type Training = Omit<TrainingData, "_links"> & { customer: string };
 export type Customer = Omit<CustomerData, "_links">;

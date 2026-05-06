@@ -109,3 +109,18 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+.fc-event-title {
+    white-space: normal !important;
+    overflow-wrap: break-word;
+    font-size: 0.85rem; /* Slightly smaller text helps on mobile/small windows */
+}
+
+.fc-daygrid-event {
+    white-space: normal !important;
+    align-items: flex-start !important;
+}
+
+.fc .fc-daygrid-day-frame {
+    min-height: 100px; 
+}
