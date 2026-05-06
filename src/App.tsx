@@ -26,7 +26,7 @@ function App() {
         <Toolbar >
           <Typography variant='h6'>Personal Trainer</Typography>
         </Toolbar>
-        <Stack direction={"row"} spacing={2}>
+        <Stack direction={"row"} spacing={4} margin={2}>
           <Link to={"/"}>Trainings</Link>
           <Link to={"/Customers"}>Customers</Link>
           <Link to={"/Calendar"}>Calendar</Link>

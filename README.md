@@ -22,7 +22,7 @@ A modern, responsive React application designed for fitness professionals to man
 | **Language** | TypeScript |
 | **Styling** | CSS3, Material UI (MUI) |
 | **Date Handling** | Day.js, Intl.DateTimeFormat |
-| **Components** | FullCalendar, MUI DataGrid |
+| **Components** | FullCalendar, MUI DataGrid, Recharts |
 | **API** | Fetch API with centralized utility pattern |
 
 ---
