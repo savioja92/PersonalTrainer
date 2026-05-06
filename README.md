@@ -1,73 +1,36 @@
-# React + TypeScript + Vite
+# Training Management Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive React application designed for fitness professionals to manage training schedules and customer data. This project utilizes a centralized API architecture to handle asynchronous data fetching and complex data transformations for calendar and grid views.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Key Features
 
-## React Compiler
+*   **Training Calendar:** Interactive schedule view powered by **FullCalendar**, featuring monthly, weekly, and daily views.
+*   **Dynamic Data Mapping:** Automatic transformation of raw API data into formatted calendar events.
+*   **Asynchronous Name Resolution:** Efficiently resolves customer URLs into readable names within the calendar and data grid without compromising performance.
+*   **Training Management:** Full CRUD capabilities for training sessions, including a customized **MUI DataGrid** for high-performance list management.
+*   **Responsive UI:** Mobile-friendly design with flexible grid layouts and text-wrapping logic for smaller viewports.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+| Category | Tools |
+| :--- | :--- |
+| **Framework** | React 18 (Vite) |
+| **Language** | TypeScript |
+| **Styling** | CSS3, Material UI (MUI) |
+| **Date Handling** | Day.js, Intl.DateTimeFormat |
+| **Components** | FullCalendar, MUI DataGrid |
+| **API** | Fetch API with centralized utility pattern |
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🏗️ Architecture & Logic
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Centralized API Pattern
+The application follows a **DRY (Don't Repeat Yourself)** principle by housing all network requests in `trainingapi.ts`. This ensures that data fetching logic is consistent across the `Trainings` `Customers` and `Calendar` views.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### State-Driven Event Resolution
+The calendar implements a "lazy-loading" style update for titles. It first renders training activities immediately, then iteratively fetches and injects customer names into the `events` state to ensure the UI remains responsive even during high-latency API responses.
