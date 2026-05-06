@@ -9,8 +9,6 @@ import EditCustomer from "./EditCustomer";
 import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 
-
-
 function Customers() {
 
     const [customers, setCustomers] = useState<CustomerData[]>([]);
@@ -84,8 +82,6 @@ function Customers() {
             .then(() => getCustomers())
             .catch(err => console.error(err))
     };
-
-
 
 
 

@@ -39,17 +39,17 @@ export default function AddTraining(props: AddTrainingProps) {
 
     return (
         <>
-            <Button sx={{ ml: 3, height: 80, mb: 'auto', mt: 3 }} 
-            variant="outlined" 
-            onClick={handleClickOpen}>
+            <Button sx={{ ml: 3, height: 80, mb: 'auto', mt: 3 }}
+                variant="outlined"
+                onClick={handleClickOpen}>
                 New training session
             </Button>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>New training</DialogTitle>
-                <TrainingForm 
-                training={training} 
-                setTraining={setTraining}
-                customers={customers} />
+                <TrainingForm
+                    training={training}
+                    setTraining={setTraining}
+                    customers={customers} />
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
                     <Button onClick={handleSubmit}>

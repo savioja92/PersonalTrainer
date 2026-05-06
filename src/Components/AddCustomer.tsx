@@ -38,10 +38,10 @@ export default function AddCustomer(props: AddCustomerProps) {
 
     return (
         <>
-            <Button 
-            sx={{ ml: 3, height: 80, mb: 'auto', mt: 3 }} 
-            variant="outlined" 
-            onClick={handleClickOpen} >
+            <Button
+                sx={{ ml: 3, height: 80, mb: 'auto', mt: 3 }}
+                variant="outlined"
+                onClick={handleClickOpen} >
                 Add a customer
             </Button>
             <Dialog open={open} onClose={handleClose}>

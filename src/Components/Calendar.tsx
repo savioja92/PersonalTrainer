@@ -7,7 +7,6 @@ import dayjs from 'dayjs';
 import { fetchTrainings, fetchCustomerByUrl } from '../trainingapi';
 import type { CalendarEvent, TrainingData, CustomerData } from '../types';
 
-
 function Calendar() {
 
     const [events, setEvents] = useState<CalendarEvent[]>([]);
@@ -23,7 +22,6 @@ function Calendar() {
 
             const calendarEvents = await Promise.all(
                 trainings.map(async (item) => {
-                    // Fetching the specific customer for this training
                     const customer: CustomerData = await fetchCustomerByUrl(item._links.customer.href);
 
                     return {
@@ -35,7 +33,6 @@ function Calendar() {
                     };
                 })
             );
-
             setEvents(calendarEvents);
         } catch (err) {
             console.error("Error fetching data", err);

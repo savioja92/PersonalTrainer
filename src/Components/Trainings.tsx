@@ -15,7 +15,8 @@ const CustomerName = ({ url }: { url: string }) => {
     useEffect(() => {
         fetchCustomerByUrl(url)
             .then(data => setName(`${data.firstname} ${data.lastname}`))
-            .catch(err => {console.error(err);
+            .catch(err => {
+                console.error(err);
                 setName("Error loading name");
             });
     }, [url]);
@@ -43,20 +44,20 @@ function Trainings() {
 
     const handleAdd = (newTraining: Training) => {
         saveTraining(newTraining)
-        .then(() => getTrainings())
-        .catch(err => console.error(err))
+            .then(() => getTrainings())
+            .catch(err => console.error(err))
     };
 
     const handleDelete = (url: string) => {
-            if (window.confirm("Are you sure?")) {
-                deleteTraining(url)
-                    .then(() => {
-                        getTrainings();
-                        setOpen(true);
-                    })
-                    .catch(err => console.error(err));
-            }
-        };
+        if (window.confirm("Are you sure?")) {
+            deleteTraining(url)
+                .then(() => {
+                    getTrainings();
+                    setOpen(true);
+                })
+                .catch(err => console.error(err));
+        }
+    };
 
 
 
@@ -108,8 +109,6 @@ function Trainings() {
                 </Button>
         }
     ]
-
-
 
 
 

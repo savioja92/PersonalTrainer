@@ -38,13 +38,13 @@ export default function EditCar(props: EditCustomerProps) {
     };
 
     const handleClose = () => {
-    setOpen(false);
-  };
+        setOpen(false);
+    };
 
-  const handleSubmit = () => {
-    props.handleUpdate(props.customer._links.self.href, customer);
-    handleClose();
-  };
+    const handleSubmit = () => {
+        props.handleUpdate(props.customer._links.self.href, customer);
+        handleClose();
+    };
 
     return (
         <>

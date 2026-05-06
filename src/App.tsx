@@ -13,33 +13,31 @@ import { Link, Outlet } from 'react-router';
 function App() {
 
   const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-});
+    palette: {
+      mode: 'dark',
+    },
+  });
 
   return (
     <>
-    <ThemeProvider theme={darkTheme}>
-    <Container maxWidth="lg">
-      <AppBar position='static' enableColorOnDark color="inherit" >
-        <Toolbar >
-          <Typography variant='h6'>Personal Trainer</Typography>
-        </Toolbar>
-        <Stack direction={"row"} spacing={4} margin={2}>
-          <Link to={"/"}>Trainings</Link>
-          <Link to={"/Customers"}>Customers</Link>
-          <Link to={"/Calendar"}>Calendar</Link>
-          <Link to={"/Stats"}>Stats</Link>
-        </Stack>
-      </AppBar>
+      <ThemeProvider theme={darkTheme}>
+        <Container maxWidth="lg">
 
-      <Outlet/>
+          <AppBar position='static' enableColorOnDark color="inherit" >
+            <Toolbar >
+              <Typography variant='h6'>Personal Trainer</Typography>
+            </Toolbar>
+            <Stack direction={"row"} spacing={4} margin={2}>
+              <Link to={"/"}>Trainings</Link>
+              <Link to={"/Customers"}>Customers</Link>
+              <Link to={"/Calendar"}>Calendar</Link>
+              <Link to={"/Stats"}>Stats</Link>
+            </Stack>
+          </AppBar>
 
-
-
-      <CssBaseline />
-      </Container>
+          <Outlet />
+          <CssBaseline />
+        </Container>
       </ThemeProvider>
     </>
   )
