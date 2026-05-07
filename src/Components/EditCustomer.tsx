@@ -52,7 +52,7 @@ export default function EditCar(props: EditCustomerProps) {
                 EDIT
             </Button>
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Edit Car</DialogTitle>
+                <DialogTitle>Edit Customer</DialogTitle>
                 <CustomerForm customer={customer} setCustomer={setCustomer} />
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
