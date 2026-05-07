@@ -28,10 +28,10 @@ function App() {
               <Typography variant='h6'>Personal Trainer</Typography>
             </Toolbar>
             <Stack direction={"row"} spacing={4} margin={2}>
-              <Link to={"/"}>Trainings</Link>
-              <Link to={"/Customers"}>Customers</Link>
-              <Link to={"/Calendar"}>Calendar</Link>
-              <Link to={"/Stats"}>Stats</Link>
+              <Link to={""}>Trainings</Link>
+              <Link to={"customers"}>Customers</Link>
+              <Link to={"calendar"}>Calendar</Link>
+              <Link to={"stats"}>Stats</Link>
             </Stack>
           </AppBar>
 

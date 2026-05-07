@@ -8,30 +8,33 @@ import Customers from './Components/Customers.tsx';
 import Calendar from './Components/Calendar.tsx'
 import Stats from './Components/Stats.tsx'
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    children: [
-      {
-        element: <Trainings />,
-        index: true
-      },
-      {
-        path: "customers",
-        element: <Customers />
-      },
-      {
-        path: "calendar",
-        element: <Calendar />
-      },
-      {
-        path: "stats",
-        element: <Stats />
-      }
-    ]
-  },
-]);
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <App />,
+      children: [
+        {
+          element: <Trainings />,
+          index: true
+        },
+        {
+          path: "customers",
+          element: <Customers />
+        },
+        {
+          path: "calendar",
+          element: <Calendar />
+        },
+        {
+          path: "stats",
+          element: <Stats />
+        }
+      ]
+    },
+  ],
+  { basename: "/PersonalTrainer" }
+);
 
 
 
@@ -39,6 +42,6 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-   <RouterProvider router={router}/>
+    <RouterProvider router={router} />
   </StrictMode>,
 )
