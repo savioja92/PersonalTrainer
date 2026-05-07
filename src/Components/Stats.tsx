@@ -11,7 +11,6 @@ function Stats() {
             .then(data => {
                 const trainings: TrainingData[] = data._embedded.trainings;
 
-                // THE LOGIC: Aggregating minutes per activity
                 const result = trainings.reduce((acc: any, current) => {
                     const activity = current.activity;
                     const duration = current.duration;
@@ -31,14 +30,6 @@ function Stats() {
             })
             .catch(err => console.error(err));
     }, []);
-
-
-
-
-
-
-
-
 
 
     return (

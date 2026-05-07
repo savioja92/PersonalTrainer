@@ -101,11 +101,6 @@ export const fetchCustomerByUrl = (url: string) => {
 
 
 
-
-
-
-
-
 // TRAININGS
 
 // ADD TRAINING 
